@@ -4,106 +4,83 @@ import org.junit.jupiter.api.Test;
 
 public class BonusServiceTest {
 
+
     @Test
-    void shouldCalculateForRegisteredAndUnderLimit() { ////Корректное поступление бонусов. Зарегестрированный пользователь
+    public void shouldCalculateForRegisteredAndUnderLimit() { //Корректное поступление бонусов. Зарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 1000;
-        boolean registered = true;
-        long expected = 30;
-
-        long actual = service.calculate(amount, registered);
+        int expected = 30;
+        int actual = service.calcBonus(1000, true);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForRegisteredOverUnderLimit() { //Максимальное начисление бонусов. Зарегестрированный пользователь
+    public void shouldCalculateForRegisteredOverUnderLimit() { //Максимальное начисление бонусов. Зарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 1_000_000;
-        boolean registered = true;
         long expected = 500;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(1_000_000, true);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForUnregisteredAndUnderLimit() { //Корректное поступление бонусов. Незарегестрированный пользователь
+    public void shouldCalculateForUnregisteredAndUnderLimit() { //Корректное поступление бонусов. Незарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 10_000;
-        boolean registered = false;
         long expected = 100;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(10_000, false);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForUnregisteredOverUnderLimit() { //Максимальный бонус. Незарегестрированный пользователь
+    public void shouldCalculateForUnregisteredOverUnderLimit() { //Максимальный бонус. Незарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 100_000_000;
-        boolean registered = false;
+
         long expected = 500;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(100_000_000, false);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForUnregisteredAndBorderlineLimit() { //Пограничное значение. Незарегестрированный пользователь
+    public void shouldCalculateForUnregisteredAndBorderlineLimit() { //Пограничное значение. Незарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 100;
-        boolean registered = false;
         long expected = 1;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(100, false);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForUnregisteredAndBorderlineInLimit() { //Пограничное значение. Незарегестрированный пользователь
+    public void shouldCalculateForUnregisteredAndBorderlineInLimit() { //Пограничное значение. Незарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 49_900;
-        boolean registered = false;
         long expected = 499;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(49_900, false);
 
         Assertions.assertEquals(expected, actual);
     }
-
     @Test
-    void shouldCalculateForUnregisteredAndNegative() { //Отрицательный результат. Незарегестрированный пользователь
+    public void shouldCalculateForUnregisteredAndNegative() { //Отрицательный результат. Незарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 1000;
-        boolean registered = false;
         long expected = 600;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(1000, false);
 
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void shouldCalculateForRegisteredAndNegative() { //Отрицательный результат. Зарегестрированный пользователь
+    public void shouldCalculateForRegisteredAndNegative() { //Отрицательный результат. Зарегестрированный пользователь
         BonusService service = new BonusService();
 
-        long amount = 1_000_000;
-        boolean registered = true;
         long expected = 300;
-
-        long actual = service.calculate(amount, registered);
+        long actual = service.calcBonus(1_000_000, true);
 
         Assertions.assertEquals(expected, actual);
     }

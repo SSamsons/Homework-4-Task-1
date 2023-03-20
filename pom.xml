@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-migrationsupport</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
@@ -30,7 +30,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <failIfNoTest>true</failIfNoTest>
+                    <failIfNoTests>true</failIfNoTests>
                 </configuration>
             </plugin>
             <plugin>
