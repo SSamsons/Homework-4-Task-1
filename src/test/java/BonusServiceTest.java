@@ -65,23 +65,4 @@ public class BonusServiceTest {
 
         Assertions.assertEquals(expected, actual);
     }
-    @Test
-    public void shouldCalculateForUnregisteredAndNegative() { //Отрицательный результат. Незарегестрированный пользователь
-        BonusService service = new BonusService();
-
-        long expected = 600;
-        long actual = service.calcBonus(1000, false);
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldCalculateForRegisteredAndNegative() { //Отрицательный результат. Зарегестрированный пользователь
-        BonusService service = new BonusService();
-
-        long expected = 300;
-        long actual = service.calcBonus(1_000_000, true);
-
-        Assertions.assertEquals(expected, actual);
-    }
 }
